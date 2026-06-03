@@ -1,0 +1,294 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E PALETE DE CORES (Tema Agrinho 2026)
+   ========================================================================== */
+:root {
+    --verde-escuro: #1b4d3e;  /* Cor principal do agro e florestas */
+    --verde-claro: #2c6b56;   /* Destaques secundários */
+    --laranja-agro: #e67e22;  /* Cor da terra, sol e colheita */
+    --bege-fundo: #f4f6f4;    /* Fundo suave que não cansa a vista */
+    --texto-escuro: #2c3e50;  /* Cor dos textos principais */
+    --branco: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bege-fundo);
+    color: var(--texto-escuro);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   CABEÇALHO E NAVEGAÇÃO
+   ========================================================================== */
+header {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--laranja-agro);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    color: var(--branco);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--laranja-agro);
+}
+
+/* ==========================================================================
+   SEÇÃO HERO (BANNER PRINCIPAL)
+   ========================================================================== */
+.hero {
+    background: linear-gradient(rgba(27, 77, 62, 0.7), rgba(27, 77, 62, 0.5)), 
+                url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1920') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--branco);
+    padding: 0 1rem;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.btn-principal {
+    background-color: var(--laranja-agro);
+    color: var(--branco);
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-principal:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   ESTRUTURA DE CONTEÚDO E SEÇÕES
+   ========================================================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--verde-escuro);
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--laranja-agro);
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* Títulos alinhados à esquerda na secção Sobre */
+.text-left {
+    text-align: left !important;
+}
+.text-left::after {
+    margin: 10px 0 0 0 !important;
+}
+
+/* Linha divisória subtil */
+.divisor {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   GRID DE PILARES / CARDS
+   ========================================================================== */
+.grid-pilares {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--branco);
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 5px solid var(--verde-claro);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    color: var(--verde-escuro);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+/* ==========================================================================
+   SECÇÃO SOBRE O PROGRAMA
+   ========================================================================== */
+.sobre-container {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sobre-texto {
+    flex: 1;
+    min-width: 300px;
+}
+
+.sobre-texto p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   TABELA DO CRONOGRAMA
+   ========================================================================== */
+.tabela-cronograma {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: var(--branco);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.tabela-cronograma th, 
+.tabela-cronograma td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+}
+
+.tabela-cronograma th {
+    background-color: var(--verde-claro);
+    color: var(--branco);
+    font-weight: 600;
+}
+
+.tabela-cronograma tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabela-cronograma tr:hover {
+    background-color: #f1f5f3;
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+footer {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    text-align: center;
+    padding: 2.5rem 2rem;
+    margin-top: 4rem;
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-sub {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--laranja-agro);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (Mobile First / Adaptável)
+   ========================================================================== */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Oculta o menu corrido em ecrãs pequenos */
+    }
+    
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .sobre-container {
+        gap: 2rem;
+    }
+    
+    .container {
+        padding: 2.5rem 1.5rem;
+    }
+}
