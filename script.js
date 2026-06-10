@@ -1,51 +1,78 @@
-// Aguarda o carregamento total da árvore DOM para segurança da execução
+// Aguarda o carregamento do DOM de forma segura
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Declaração de variáveis e seleção de elementos do DOM
+    // Elementos da Interface
     const botaoTema = document.getElementById("botao-tema");
     const botaoCalcular = document.getElementById("botao-calcular");
-    const formulario = document.getElementById("formulario-simulador");
     const containerResultado = document.getElementById("resultado-calculo");
     const textoResultado = document.getElementById("texto-resultado");
+    const barraProgresso = document.getElementById("barra-progresso");
+    const btnAumentar = document.getElementById("btn-aumentar-fonte");
+    const btnDiminuir = document.getElementById("btn-diminuir-fonte");
 
-    // Constante que dita a economia teórica: Litros salvos por quilo produzido de forma inteligente
+    // Constantes de Controle
     const LITROS_SALVOS_POR_KG = 9.5;
+    let tamanhoFonteAtual = 100; // Base percentual (%)
 
-    // 2. Manipulador de Evento para Mudança de Tema (Melhoria de Usabilidade)
-    botaoTema.addEventListener("click", () => {
-        // Altera a classe do corpo da página aplicando os estilos de Modo Escuro
-        document.body.classList.toggle("modo-escuro");
-        
-        // Atualiza dinamicamente o texto impresso no botão para guiar o usuário
-        if (document.body.classList.contains("modo-escuro")) {
-            botaoTema.textContent = "Modo Claro";
+    // --- FUNÇÃO 1: Controle de Acessibilidade (Aumentar/Diminuir Texto) ---
+    function ajustarTamanhoFonte(modificador) {
+        tamanhoFonteAtual += modificador;
+        // Limita o tamanho do texto para não quebrar o layout (Entre 80% e 140%)
+        if (tamanhoFonteAtual >= 80 && tamanhoFonteAtual <= 140) {
+            document.documentElement.style.fontSize = `${tamanhoFonteAtual}%`;
         } else {
-            botaoTema.textContent = "Modo Escuro";
+            tamanhoFonteAtual -= modificador; // Desfaz caso passe do limite
         }
-    });
+    }
 
-    // 3. Manipulador de Evento para o Cálculo de Sustentabilidade
-    botaoCalcular.addEventListener("click", () => {
-        // Coleta os dados digitados e trata o valor numérico
+    // --- FUNÇÃO 2: Atualização Visual da Barra de Progresso ---
+    function atualizarBarraImpacto(litros) {
+        // Define o limite máximo da barra baseado em 1000 litros para fins de escala visual
+        let porcentagem = (litros / 1000) * 100;
+        if (porcentagem > 100) porcentagem = 100;
+        if (porcentagem < 10) porcentagem = 10; // Tamanho mínimo estético
+
+        // Altera propriedades dinâmicas do elemento DOM
+        barraProgresso.style.width = `${porcentagem}%`;
+
+        // Altera a cor do gráfico dinamicamente com base no impacto (Item Avançado da Rubrica)
+        if (litros < 300) {
+            barraProgresso.style.backgroundColor = "var(--cor-alerta)";
+        } else {
+            barraProgresso.style.backgroundColor = "var(--cor-primaria)";
+        }
+    }
+
+    // --- FUNÇÃO 3: Processamento dos Dados do Simulador ---
+    function executarSimulacao() {
         const nomeInjetado = document.getElementById("nome-usuario").value.trim();
         const quilosDigitados = parseFloat(document.getElementById("quilos-produzidos").value);
 
-        // Validação manual simples para evitar processamento incorreto
         if (nomeInjetado === "" || isNaN(quilosDigitados) || quilosDigitados <= 0) {
-            alert("Por favor, preencha todos os campos corretamente com valores positivos.");
+            alert("Por favor, digite um nome válido e uma quantidade positiva de quilos.");
             return;
         }
 
-        // Processa as informações calculando a economia final (Variáveis lógicas)
         const economiaTotalLitros = (quilosDigitados * LITROS_SALVOS_POR_KG).toFixed(1);
 
-        // Cria a string personalizada manipulando a mensagem de retorno
-        const mensagemCustomizada = `Olá, <strong>${nomeInjetado}</strong>! Ao produzir ${quilosDigitados}kg de alimentos de forma sustentável, estima-se que você poupou <strong>${economiaTotalLitros} litros</strong> de água frente aos sistemas agrícolas tradicionais desregulados. Parabéns por apoiar o equilíbrio ambiental!`;
+        // Injeta o texto manipulando o DOM com segurança
+        textoResultado.innerHTML = `Olá, <strong>${nomeInjetado}</strong>! Ao produzir ${quilosDigitados}kg de alimentos de forma sustentável, estima-se que você poupou <strong>${economiaTotalLitros} litros</strong> de água frente aos sistemas agrícolas tradicionais desregulados.`;
 
-        // Altera a propriedade de texto interna do elemento do DOM de forma segura
-        textoResultado.innerHTML = mensagemCustomizada;
-
-        // Exibe o bloco de resultado modificando as classes CSS dinamicamente
+        // Exibe o painel de resultados
         containerResultado.classList.add("resultado-visivel");
+
+        // Dispara o comportamento visual da barra de carregamento
+        atualizarBarraImpacto(parseFloat(economiaTotalLitros));
+    }
+
+    // --- ESCUTADORES DE EVENTOS (Tratamento de Cliques) ---
+    btnAumentar.addEventListener("click", () => ajustarTamanhoFonte(10));
+    btnDiminuir.addEventListener("click", () => ajustarTamanhoFonte(-10));
+    
+    botaoTema.addEventListener("click", () => {
+        document.body.classList.toggle("modo-escuro");
+        botaoTema.textContent = document.body.classList.contains("modo-escuro") ? "Modo Claro" : "Modo Escuro";
     });
+
+    botaoCalcular.addEventListener("click", executarSimulacao);
 });
