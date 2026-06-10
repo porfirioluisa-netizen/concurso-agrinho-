@@ -18,12 +18,17 @@
             <a href="#calculadora">Simulador</a>
             <a href="#contato">Contato</a>
         </nav>
-        <button id="botao-tema" class="btn-tema" aria-label="Alternar modo escuro">Modo Escuro</button>
+        
+        <!-- Controles de Acessibilidade e Tema (Funcionalidades Adicionais) -->
+        <div class="controles-header">
+            <button id="btn-diminuir-fonte" class="btn-util" aria-label="Diminuir fonte">A-</button>
+            <button id="btn-aumentar-fonte" class="btn-util" aria-label="Aumentar fonte">A+</button>
+            <button id="botao-tema" class="btn-tema" aria-label="Alternar modo escuro">Modo Escuro</button>
+        </div>
     </header>
 
     <!-- Conteúdo Principal -->
     <main>
-        <!-- Seção de Abertura / Banner -->
         <section id="sobre" class="secao-banner">
             <div class="conteudo-banner">
                 <h2>Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente</h2>
@@ -32,7 +37,7 @@
             </div>
         </section>
 
-        <!-- Seção Interativa com Manipulação do DOM -->
+        <!-- Seção Interativa -->
         <section id="calculadora" class="secao-interativa">
             <div class="container-card">
                 <h3>Simulador de Economia Hidropônica</h3>
@@ -52,27 +57,32 @@
                     <button type="button" id="botao-calcular" class="btn-acao">Calcular Equilíbrio</button>
                 </form>
 
-                <!-- Div de Resultado manipulada via JS -->
+                <!-- Bloco de Resultado Avançado com Gráfico Dinâmico -->
                 <div id="resultado-calculo" class="resultado-oculto">
                     <p id="texto-resultado"></p>
+                    
+                    <!-- Barra de Impacto Visual gerada por JS -->
+                    <div class="container-barra">
+                        <span class="label-barra">Nível de Impacto Ecológico:</span>
+                        <div class="barra-fundo">
+                            <div id="barra-progresso" class="barra-preenchimento"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção de Contato e Créditos -->
         <section id="contato" class="secao-contato">
             <h3>Faça Parte da Mudança</h3>
             <p>Desenvolvido para fins educacionais em conformidade com as diretrizes do Concurso Agrinho Paraná 2026.</p>
         </section>
     </main>
 
-    <!-- Rodapé -->
     <footer class="rodape-pagina">
         <p>&copy; 2026 Concurso Agrinho. Todos os direitos reservados.</p>
-        <p class="creditos">Créditos de mídia: Elementos Visuais customizados nativamente via CSS.</p>
+        <p class="creditos">Créditos de mídia: Elementos Visuais customizados nativamente via CSS e JS.</p>
     </footer>
 
-    <!-- Script Externo -->
     <script src="script.js"></script>
 </body>
 </html>
