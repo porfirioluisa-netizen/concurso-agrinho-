@@ -1,1 +1,5 @@
 <img src="https://pexels.com" alt="Campo agrícola moderno utilizando sistemas de irrigação automatizada sustentável" class="imagem-responsiva">
+<video controls class="video-responsivo" poster="https://pexels.com">
+    <source src="https://vimeo.com" type="video/mp4">
+    Seu navegador não suporta a reprodução de vídeos nativos.
+</video>
