@@ -1,102 +1,51 @@
-// ==========================================
-// 1. INJEÇÃO DE ESTILOS (CSS)
-// ==========================================
-const estilizacao = document.createElement('style');
-estilizacao.textContent = `
-    :root {
-        --verde-escuro: #1b4d3e;
-        --verde-claro: #2c6b56;
-        --laranja-agro: #e67e22;
-        --bege-fundo: #f4f6f4;
-        --texto-escuro: #2c3e50;
-        --branco: #ffffff;
-    }
+// Aguarda o carregamento total da árvore DOM para segurança da execução
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Declaração de variáveis e seleção de elementos do DOM
+    const botaoTema = document.getElementById("botao-tema");
+    const botaoCalcular = document.getElementById("botao-calcular");
+    const formulario = document.getElementById("formulario-simulador");
+    const containerResultado = document.getElementById("resultado-calculo");
+    const textoResultado = document.getElementById("texto-resultado");
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    // Constante que dita a economia teórica: Litros salvos por quilo produzido de forma inteligente
+    const LITROS_SALVOS_POR_KG = 9.5;
 
-    body {
-        background-color: var(--bege-fundo);
-        color: var(--texto-escuro);
-        line-height: 1.6;
-    }
+    // 2. Manipulador de Evento para Mudança de Tema (Melhoria de Usabilidade)
+    botaoTema.addEventListener("click", () => {
+        // Altera a classe do corpo da página aplicando os estilos de Modo Escuro
+        document.body.classList.toggle("modo-escuro");
+        
+        // Atualiza dinamicamente o texto impresso no botão para guiar o usuário
+        if (document.body.classList.contains("modo-escuro")) {
+            botaoTema.textContent = "Modo Claro";
+        } else {
+            botaoTema.textContent = "Modo Escuro";
+        }
+    });
 
-    header {
-        background-color: var(--verde-escuro);
-        color: var(--branco);
-        padding: 1rem 2rem;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
+    // 3. Manipulador de Evento para o Cálculo de Sustentabilidade
+    botaoCalcular.addEventListener("click", () => {
+        // Coleta os dados digitados e trata o valor numérico
+        const nomeInjetado = document.getElementById("nome-usuario").value.trim();
+        const quilosDigitados = parseFloat(document.getElementById("quilos-produzidos").value);
 
-    .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        // Validação manual simples para evitar processamento incorreto
+        if (nomeInjetado === "" || isNaN(quilosDigitados) || quilosDigitados <= 0) {
+            alert("Por favor, preencha todos os campos corretamente com valores positivos.");
+            return;
+        }
 
-    .logo h1 { font-size: 1.8rem; font-weight: bold; letter-spacing: 1px; }
-    .logo span { color: var(--laranja-agro); }
+        // Processa as informações calculando a economia final (Variáveis lógicas)
+        const economiaTotalLitros = (quilosDigitados * LITROS_SALVOS_POR_KG).toFixed(1);
 
-    nav ul { display: flex; list-style: none; gap: 2rem; }
-    nav a { color: var(--branco); text-decoration: none; font-weight: 500; transition: color 0.3s; }
-    nav a:hover { color: var(--laranja-agro); }
+        // Cria a string personalizada manipulando a mensagem de retorno
+        const mensagemCustomizada = `Olá, <strong>${nomeInjetado}</strong>! Ao produzir ${quilosDigitados}kg de alimentos de forma sustentável, estima-se que você poupou <strong>${economiaTotalLitros} litros</strong> de água frente aos sistemas agrícolas tradicionais desregulados. Parabéns por apoiar o equilíbrio ambiental!`;
 
-    .hero {
-        background: linear-gradient(rgba(27, 77, 62, 0.7), rgba(27, 77, 62, 0.5)), 
-                    url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1920') no-repeat center center/cover;
-        height: 60vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: var(--branco);
-        padding: 0 1rem;
-    }
+        // Altera a propriedade de texto interna do elemento do DOM de forma segura
+        textoResultado.innerHTML = mensagemCustomizada;
 
-    .hero-content h2 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-    .hero-content p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem auto; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-
-    .btn-principal {
-        background-color: var(--laranja-agro);
-        color: var(--branco);
-        padding: 0.8rem 2rem;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s;
-        text-decoration: none;
-        display: inline-block;
-    }
-    .btn-principal:hover { background-color: #d35400; }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
-    .section-title { text-align: center; color: var(--verde-escuro); font-size: 2.2rem; margin-bottom: 3rem; position: relative; }
-    .section-title::after {
-        content: ''; display: block; width: 60px; height: 4px; background-color: var(--laranja-agro); margin: 10px auto 0 auto; border-radius: 2px;
-    }
-
-    .grid-pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .card {
-        background-color: var(--branco); padding: 2.5rem 2rem; border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s; border-top: 5px solid var(--verde-claro);
-    }
-    .card:hover { transform: translateY(-5px); }
-    .card h3 { color: var(--verde-escuro); margin-bottom: 1rem; font-size: 1.4rem; }
-
-    .sobre-container { display: flex; gap: 4rem; align-items: center; flex-wrap: wrap; }
-    .sobre-texto { flex: 1; min-width: 300px; }
-    .sobre-texto p { margin-bottom: 1.5rem; font-size: 1.1rem; }
-
-    .tabela-cronograma { width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--branco); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    .tabela-cronograma th, .tabela-cron
+        // Exibe o bloco de resultado modificando as classes CSS dinamicamente
+        containerResultado.classList.add("resultado-visivel");
+    });
+});
