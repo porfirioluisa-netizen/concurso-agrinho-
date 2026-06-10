@@ -13,3 +13,6 @@ Este site interativo foi construído especificamente para atender à Subcategori
 2. Abra o arquivo `index.html` diretamente em qualquer navegador de internet atual (Chrome, Firefox, Edge, Safari).
 3. Para testar o Simulador, role a página até a respectiva seção, insira seu nome, declare o peso e clique em "Calcular Equilíbrio".
 4. Experimente clicar no botão de "Modo Escuro" localizado no topo para avaliar a usabilidade e o contraste visual adaptativo.
+5. **Acessibilidade Web Nativa:** Sistema JS de redimensionamento dinâmico de fontes (`A+` e `A-`) sem distorcer o layout de visualização.
+6. **Componentização e Modularidade:** Código JavaScript totalmente estruturado através de escopos de funções bem definidas e isoladas.
+7. **Gráfico Dinâmico Reativo:** Barra de progresso customizada que altera sua largura e cor em tempo real de acordo com o volume gerado na lógica matemática do simulador.
