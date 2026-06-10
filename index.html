@@ -3,338 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrinho 2026 | Do Campo à Cidade</title>
-    <style>
-        /* Configurações Gerais e Cores */
-        :root {
-            --verde-escuro: #1b4d3e;
-            --verde-claro: #2c6b56;
-            --laranja-agro: #e67e22;
-            --bege-fundo: #f4f6f4;
-            --texto-escuro: #2c3e50;
-            --branco: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bege-fundo);
-            color: var(--texto-escuro);
-            line-height: 1.6;
-        }
-
-        /* Cabeçalho e Navegação */
-        header {
-            background-color: var(--verde-escuro);
-            color: var(--branco);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--laranja-agro);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--branco);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--laranja-agro);
-        }
-
-        /* Seção Hero (Banner Principal) */
-        .hero {
-            background: linear-gradient(rgba(27, 77, 62, 0.7), rgba(27, 77, 62, 0.5)), 
-                        url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1920') no-repeat center center/cover;
-            height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--branco);
-            padding: 0 1rem;
-        }
-
-        .hero-content h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .btn-principal {
-            background-color: var(--laranja-agro);
-            color: var(--branco);
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-decoration: none;
-        }
-
-        .btn-principal:hover {
-            background-color: #d35400;
-        }
-
-        /* Seções de Conteúdo */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            color: var(--verde-escuro);
-            font-size: 2.2rem;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--laranja-agro);
-            margin: 10px auto 0 auto;
-            border-radius: 2px;
-        }
-
-        /* Grid de Categorias/Pilares */
-        .grid-pilares {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background-color: var(--branco);
-            padding: 2.5rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: transform 0.3s;
-            border-top: 5px solid var(--verde-claro);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--verde-escuro);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        /* Seção Sobre / Cronograma */
-        .sobre-container {
-            display: flex;
-            gap: 4rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .sobre-texto {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .sobre-texto p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        /* Tabela de Cronograma */
-        .tabela-cronograma {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            background: var(--branco);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .tabela-cronograma th, .tabela-cronograma td {
-            padding: 1rem;
-            text-align: left;
-        }
-
-        .tabela-cronograma th {
-            background-color: var(--verde-claro);
-            color: var(--branco);
-        }
-
-        .tabela-cronograma tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        /* Rodapé */
-        footer {
-            background-color: var(--verde-escuro);
-            color: var(--branco);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none; /* Em um projeto real, aqui entraria um menu sanduíche */
-            }
-            .hero-content h2 {
-                font-size: 2rem;
-            }
-            .sobre-container {
-                gap: 2rem;
-            }
-        }
-    </style>
+    <title>Agro Forte, Futuro Sustentável</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <div class="logo">
-                <h1>Agrinho <span>2026</span></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#pilares">Pilares</a></li>
-                    <li><a href="#sobre">O Programa</a></li>
-                    <li><a href="#cronograma">Cronograma</a></li>
-                </ul>
-            </nav>
+    <!-- Cabeçalho Principal -->
+    <header class="cabecalho-principal">
+        <div class="logo">
+            <h1>AgroSustentável</h1>
         </div>
+        <nav class="menu-navegacao">
+            <a href="#sobre">Sobre</a>
+            <a href="#calculadora">Simulador</a>
+            <a href="#contato">Contato</a>
+        </nav>
+        <button id="botao-tema" class="btn-tema" aria-label="Alternar modo escuro">Modo Escuro</button>
     </header>
 
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <h2>As Inovações do Campo na Educação</h2>
-            <p>Conectando a sustentabilidade, a tecnologia e o conhecimento das nossas raízes com o futuro das novas gerações.</p>
-            <a href="#sobre" class="btn-principal">Saiba Mais</a>
-        </div>
-    </section>
-
-    <section class="container" id="pilares">
-        <h2 class="section-title">Temas em Destaque</h2>
-        <div class="grid-pilares">
-            <div class="card">
-                <h3>Sustentabilidade</h3>
-                <p>Práticas conscientes que preservam o meio ambiente, garantindo os recursos naturais para o futuro do nosso planeta.</p>
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Seção de Abertura / Banner -->
+        <section id="sobre" class="secao-banner">
+            <div class="conteudo-banner">
+                <h2>Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente</h2>
+                <p>Descubra como o uso consciente da água e a tecnologia transformam o campo mantendo nossa biodiversidade protegida.</p>
+                <a href="#calculadora" class="btn-principal">Testar Simulador</a>
             </div>
-            <div class="card">
-                <h3>Inovação Digital</h3>
-                <p>A tecnologia transformando o campo: drones, inteligência artificial e conectividade impulsionando a agricultura.</p>
+        </section>
+
+        <!-- Seção Interativa com Manipulação do DOM -->
+        <section id="calculadora" class="secao-interativa">
+            <div class="container-card">
+                <h3>Simulador de Economia Hidropônica</h3>
+                <p>Descubra a quantidade estimada de litros de água salvos ao produzir alimentos usando sistemas de irrigação inteligente:</p>
+                
+                <form id="formulario-simulador" class="form-sustentavel" onsubmit="return false;">
+                    <div class="grupo-campo">
+                        <label for="nome-usuario">Qual é o seu nome?</label>
+                        <input type="text" id="nome-usuario" placeholder="Digite seu nome aqui" required>
+                    </div>
+                    
+                    <div class="grupo-campo">
+                        <label for="quilos-produzidos">Quantidade estimada de produção (em kg):</label>
+                        <input type="number" id="quilos-produzidos" min="1" max="10000" placeholder="Ex: 50" required>
+                    </div>
+
+                    <button type="button" id="botao-calcular" class="btn-acao">Calcular Equilíbrio</button>
+                </form>
+
+                <!-- Div de Resultado manipulada via JS -->
+                <div id="resultado-calculo" class="resultado-oculto">
+                    <p id="texto-resultado"></p>
+                </div>
             </div>
-            <div class="card">
-                <h3>Cidadania</h3>
-                <p>Formar jovens conscientes de seus direitos e deveres, unindo a comunidade escolar e a sociedade e o agro.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <hr style="border: 0; height: 1px; background: #e0e0e0; max-width: 1200px; margin: 0 auto;">
+        <!-- Seção de Contato e Créditos -->
+        <section id="contato" class="secao-contato">
+            <h3>Faça Parte da Mudança</h3>
+            <p>Desenvolvido para fins educacionais em conformidade com as diretrizes do Concurso Agrinho Paraná 2026.</p>
+        </section>
+    </main>
 
-    <section class="container" id="sobre">
-        <div class="sobre-container">
-            <div class="sobre-texto">
-                <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Sobre o Agrinho 2026</h2>
-                <p>O Programa Agrinho é a maior iniciativa de responsabilidade social do setor, integrando informações sobre saúde, segurança pessoal e ambiental, com foco especial nas crianças e jovens das escolas públicas e particulares.</p>
-                <p>Em 2026, nosso foco se expande para as <strong>tecnologias verdes</strong> e a <strong>segurança alimentar</strong>, desafiando alunos e professores a criarem soluções criativas para aproximar ainda mais a produção do campo da mesa das cidades.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="container" id="cronograma">
-        <h2 class="section-title">Etapas do Concurso</h2>
-        <table class="tabela-cronograma">
-            <thead>
-                <tr>
-                    <th>Fase / Evento</th>
-                    <th>Prazo / Data</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Lançamento do Tema e Materiais Didáticos</td>
-                    <td>Março de 2026</td>
-                    <td>Concluído</td>
-                </tr>
-                <tr>
-                    <td>Desenvolvimento dos Trabalhos em Aula</td>
-                    <td>Abril a Agosto de 2026</td>
-                    <td>Em andamento</td>
-                </tr>
-                <tr>
-                    <td>Data Limite para Envio dos Projetos</td>
-                    <td>Setembro de 2026</td>
-                    <td>Breve</td>
-                </tr>
-                <tr>
-                    <td>Grande Cerimônia de Premiação</td>
-                    <td>Novembro de 2026</td>
-                    <td>Agendado</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Concurso Cultural Agrinho. Desenvolvido para fins educativos.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--laranja-agro);">Alimentando o conhecimento, cultivando o futuro.</p>
+    <!-- Rodapé -->
+    <footer class="rodape-pagina">
+        <p>&copy; 2026 Concurso Agrinho. Todos os direitos reservados.</p>
+        <p class="creditos">Créditos de mídia: Elementos Visuais customizados nativamente via CSS.</p>
     </footer>
 
+    <!-- Script Externo -->
+    <script src="script.js"></script>
 </body>
 </html>
